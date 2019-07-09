@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "modul/function/functions.php";
+include "koneksi.php";
 if(!isset($_SESSION['name']))
 {
   header("location:login.php");
@@ -81,7 +82,7 @@ else
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="vendor/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <span class="hidden-xs"><b><?=$_SESSION['name']?></b></span>
             </a>
             <ul class="dropdown-menu">
@@ -111,7 +112,7 @@ else
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="vendor/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?=$_SESSION['name']?></p>
