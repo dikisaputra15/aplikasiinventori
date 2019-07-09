@@ -37,7 +37,8 @@
     let xmlHttp = new XMLHttpRequest();
     let url = "modul/customer/create_process.php";
     let param = "create=" + customer + "&namaCustomer=" + namaCustomer + "&email=" + email + "&alamat=" + alamat + "&noHp=" + noHp ;
-    xmlHttp.onreadystatechange = function() {
+    xmlHttp.onreadystatechange = function() 
+    {
       if(xmlHttp.readyState == 4)
       {
         let res = xmlHttp.responseText;
@@ -48,6 +49,26 @@
     xmlHttp.open("POST",url,true);
     xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlHttp.send(param);
+  }
+
+  function editdata(data)
+  {
+    let xmlHttp = new XMLHttpRequest();
+    let url = "modul/customer/edit_process.php?op=getdata&id=" + data;
+    xmlHttp.onreadystatechange = function() 
+    {
+      if(xmlHttp.readyState == 4)
+      {
+        let res = xmlHttp.responseText;
+        let resJson = JSON.parse(res);
+        document.getElementById("nama_customer").value = resJson.nama_customer;
+        document.getElementById("email").value = resJson.email;
+        document.getElementById("alamat").value = resJson.alamat;
+        document.getElementById("no_hp").value = resJson.no_hp;
+      }
+    }
+    xmlHttp.open("GET",url,true);
+    xmlHttp.send(null);
   }
 
   
@@ -140,6 +161,7 @@
                   <th>Alamat</th>
                   <th>Email</th>
                   <th>Nomor HP</th>
+                  <th>Aksi</th>
                 </tr>
                 </thead>
                 <tbody id="datatest">
@@ -152,6 +174,12 @@
                             "<td>".$data->alamat."</td>".
                             "<td>".$data->email."</td>".
                             "<td>".$data->no_hp."</td>".
+                            "<td>
+                              <div class='btn-group'>
+                              <button type='button' class='btn btn-success btn-sm' onclick='editdata($data->id_customer)' data-toggle='modal' data-target='#modal-default'><i class='fa fa-edit'></i></button>
+                              <button type='button' class='btn btn-danger btn-sm'><i class='fa fa-trash'></i></button>
+                              </div>
+                            </td>".
                             "</tr>";
                     }
                 ?>
